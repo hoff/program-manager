@@ -1,42 +1,65 @@
 <div class="content">
-<h1 (click)="data.setLoading()">Program Manager</h1>
-<p>a demo application</p>
+
+  <div style="border-bottom: 1px solid #333; margin-bottom: 60px;">
+
+    <h1 (click)="data.setLoading()">Program Manager</h1>
+    <p>a demo application</p>
+  </div>
 
 <div>
 
-  <div *ngFor="let program of data.projection$ | async">
+  <div *ngFor="let program of data.projection$ | async" class="programContainer">
     <h2>{{ program.name }}</h2>
+
+    <!-- placeholder when no activities -->
+    <div *ngIf="program.activities.length === 0" class="activity__placeholder">
+      This program doesn't have any activities yet. You can create one below.
+    </div>
+
     <div *ngFor="let activity of program.activities">
-      <h4>{{ activity.name }}</h4>
-      <div style="color: gray; font-size: 12px;">
-        <span *ngIf="activity.expected_start_date">starts {{ activity.expected_start_date | date:'fullDate' }}</span>
-        <span *ngIf="activity.expected_end_date"> ends {{ activity.expected_end_date | date:'fullDate' }}</span>
-      </div>
-      <button (click)="data.deleteActivity(activity.id)">delete!</button>
+      
+
+      <flex-row class="activity__container">
+          <flex-col style="flex-grow: 1;">
+              <div class="activity__name">{{ activity.name }}</div>
+              <div style="color: gray; font-size: 12px;">
+                  <span *ngIf="activity.expected_start_date">{{ activity.expected_start_date | date:'mediumDate' }}</span>
+                  <span *ngIf="activity.expected_end_date"> - {{ activity.expected_end_date | date:'mediumDate' }}</span>
+                </div>
+          </flex-col>
+          
+          <button (click)="data.deleteActivity(activity.id)" class="activityForm__delete">delete activity</button>
+      </flex-row>
+
+      
 
     </div>
-    <h5>new activity!</h5>
+    
     <flex-col>
 
-      Activity Name
-      <input type="text" #newActivityName placeholder="Activity Name" /> start date
+      <!-- new activity -->
+      <input type="text" #newActivityName placeholder="New Activity Name" class="activityForm__input"/>
 
+      <div>
       <!-- start date -->
-      <input [matDatepicker]="startDate" #startDateInput placeholder="Start Date">
+      <input [matDatepicker]="startDate" #startDateInput placeholder="Start Date" class="activityForm__input">
       <mat-datepicker-toggle [for]="startDate"></mat-datepicker-toggle>
       <mat-datepicker #startDate></mat-datepicker>
       
       <!-- end date -->
-      <input [matDatepicker]="endDate" #endDateInput placeholder="End Date">
+      <input [matDatepicker]="endDate" #endDateInput placeholder="End Date" class="activityForm__input">
       <mat-datepicker-toggle [for]="endDate"></mat-datepicker-toggle>
       <mat-datepicker #endDate></mat-datepicker>
-      
-      <!-- create -->
-      <button (click)="data.createActivity(newActivityName.value, program.url, startDateInput.value, endDateInput.value)">
-        create activity!
-      </button>
+
+    </div>
 
     </flex-col>
+      
+      <!-- create -->
+      <button (click)="data.createActivity(newActivityName.value, program.url, startDateInput.value, endDateInput.value)" class="activityForm__submit">
+        Create Activity
+      </button>
+
   </div>
 
 </div>
@@ -46,5 +69,5 @@
 
 <!-- overlay -->
 <div id="overlay" *ngIf="(data.ui$ | async)?.loading">
-  loading!
+    <div class="loader"></div>
 </div>

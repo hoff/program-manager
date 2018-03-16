@@ -77,7 +77,9 @@ export class DataService {
     })
   }
 
-
+  /**
+   * Creates a new activity
+   */
   createActivity(name, programID, startDate, endDate) {
 
     const params = {
@@ -99,12 +101,17 @@ export class DataService {
       });
   }
 
+  /**
+   * Deletes an activity by its ID
+   */
   deleteActivity(id) {
     const url = this.activityURL + id + '/'
     this.setLoading()
     this.http.delete(url, this.getAuthorizedHeader()).subscribe(reply => {
       this.store.dispatch({type: DELETE_ACTIVITY_SUCCESS, payload: {id: id}})
       this.unsetLoading()
+    }, () => {
+      alert('error deleting activity')
     })
   }
 

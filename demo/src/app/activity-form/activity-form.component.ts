@@ -46,6 +46,7 @@ export class ActivityFormComponent implements OnInit {
    */
   submit(name, startDate, endDate) {
     if (this.activityForm.valid ) {
+      this.activityForm.reset()
       this.data.createActivity(name, this.programURL, startDate, endDate)
     } else {
       this.showMessages = true

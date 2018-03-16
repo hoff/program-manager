@@ -13,7 +13,14 @@ import 'rxjs/add/observable/combineLatest'
 import { Store, select, Action } from '@ngrx/store'
 
 // app
-import { AppState, LOAD_PROGRAMS_SUCCESS, LOAD_ACTIVITIES_SUCCESS, SAVE_ACTIVITY_SUCCESS, DELETE_ACTIVITY_SUCCESS } from './reducers'
+import {
+  AppState,
+  LOAD_ACTIVITIES_REQUESTED,
+  LOAD_PROGRAMS_SUCCESS,
+  LOAD_ACTIVITIES_SUCCESS,
+  SAVE_ACTIVITY_SUCCESS,
+  DELETE_ACTIVITY_SUCCESS,
+} from './reducers'
 
 @Injectable()
 export class DataService {
@@ -60,10 +67,6 @@ export class DataService {
       this.projection$.next(programs.slice(0))
     })
 
-    // kick off initial loading
-    this.loadActivities()
-    this.loadPrograms()
-
   }
 
   loadPrograms() {
@@ -71,10 +74,20 @@ export class DataService {
       this.store.dispatch({type: LOAD_PROGRAMS_SUCCESS, payload: reply.json()})
     })
   }
+
+  // no longer in use.
   loadActivities() {
     this.http.get(this.activityURL, this.getAuthorizedHeader()).subscribe(reply => {
       this.store.dispatch({type: LOAD_ACTIVITIES_SUCCESS, payload: reply.json()})
     })
+  }
+
+  getActivities() {
+    return this.http.get(this.activityURL, this.getAuthorizedHeader())
+  }
+
+  requestActivities() {
+    this.store.dispatch({type: LOAD_ACTIVITIES_REQUESTED })
   }
 
   /**

@@ -25,6 +25,8 @@ import {
   activityReducer,
   uiReducer
 } from './reducers';
+import { ContentEffects } from './effects'
+
 import { ActivityFormComponent } from './activity-form/activity-form.component'
 
 
@@ -56,6 +58,7 @@ import { ActivityFormComponent } from './activity-form/activity-form.component'
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
+    EffectsModule.forRoot([ContentEffects]),
   ],
   providers: [
     DataService,

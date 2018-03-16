@@ -1,6 +1,6 @@
 // ng
 import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { HttpClientModule } from '@angular/common/http'
 import { HttpModule } from '@angular/http';
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
@@ -57,6 +57,9 @@ import {
   ],
   providers: [
     DataService,
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
   ],
   bootstrap: [AppComponent]
 })

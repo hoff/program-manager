@@ -66,7 +66,7 @@ export function activityReducer(state = [], action: GenericAction) {
   }
 }
 
-export function uiReducer(state = { loading: false }, action: GenericAction) {
+export function uiReducer(state = { isLoading: false }, action: GenericAction) {
   switch (action.type) {
     case IS_LOADING:
       return Object.assign(state, { loading: action.payload });

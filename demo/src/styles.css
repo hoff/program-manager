@@ -1,2 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body, html {
+	margin: 0;
+	padding: 0;
+	background: lightblue;
+}
+ body, button, input {
+	font-family: 'Open Sans', sans-serif;
+ }
+
+
+.content {
+	width: 100%;
+	max-width: 800px;
+	box-sizing: border-box;
+	margin: 0px auto;
+	background: white;
+	padding: 40px 60px;
+}
+
+flex-col { 
+	display: flex;
+	flex-direction: column;
+}
+
+#overlay {
+	width: 100vw;
+	height: 100vh;
+	display: flex; 
+	justify-content: center;
+	align-items: center;
+	background: rgba(0,0,0,0.6);
+	color: white;
+	position: fixed;
+	top: 0; 
+	left: 0;
+}

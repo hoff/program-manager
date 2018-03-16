@@ -1,10 +1,50 @@
-<h1>Program Manager</h1>
+<div class="content">
+<h1 (click)="data.setLoading()">Program Manager</h1>
 <p>a demo application</p>
 
 <div>
-  load programs <button (click)="data.loadPrograms()">load programs</button>
 
-  load activities <button (click)="data.loadActivities()">load activities</button>
-  
+  <div *ngFor="let program of data.projection$ | async">
+    <h2>{{ program.name }}</h2>
+    <div *ngFor="let activity of program.activities">
+      <h4>{{ activity.name }}</h4>
+      <div style="color: gray; font-size: 12px;">
+        <span *ngIf="activity.expected_start_date">starts {{ activity.expected_start_date | date:'fullDate' }}</span>
+        <span *ngIf="activity.expected_end_date"> ends {{ activity.expected_end_date | date:'fullDate' }}</span>
+      </div>
+      <button (click)="data.deleteActivity(activity.id)">delete!</button>
 
+    </div>
+    <h5>new activity!</h5>
+    <flex-col>
+
+      Activity Name
+      <input type="text" #newActivityName placeholder="Activity Name" /> start date
+
+      <!-- start date -->
+      <input [matDatepicker]="startDate" #startDateInput placeholder="Start Date">
+      <mat-datepicker-toggle [for]="startDate"></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+      
+      <!-- end date -->
+      <input [matDatepicker]="endDate" #endDateInput placeholder="End Date">
+      <mat-datepicker-toggle [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+      
+      <!-- create -->
+      <button (click)="data.createActivity(newActivityName.value, program.url, startDateInput.value, endDateInput.value)">
+        create activity!
+      </button>
+
+    </flex-col>
+  </div>
+
+</div>
+
+</div>
+
+
+<!-- overlay -->
+<div id="overlay" *ngIf="(data.ui$ | async)?.loading">
+  loading!
 </div>

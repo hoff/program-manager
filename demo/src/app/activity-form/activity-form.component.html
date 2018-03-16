@@ -1,0 +1,33 @@
+<flex-col>
+
+  <form [formGroup]="activityForm" (submit)="submit(newActivityName.value, startDateInput.value, endDateInput.value)">
+
+    <!-- activity name -->
+    <input formControlName="name" type="text" #newActivityName placeholder="New Activity Name" class="activityForm__input"/>
+
+    <div>
+      <!-- start date -->
+      <input [matDatepicker]="startDate" #startDateInput placeholder="Start Date" class="activityForm__input">
+      <mat-datepicker-toggle [for]="startDate"></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+
+      <!-- end date -->
+      <input [matDatepicker]="endDate" #endDateInput placeholder="End Date" class="activityForm__input">
+      <mat-datepicker-toggle [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+    </div>
+
+    <!-- create -->
+    <flex-row-start-center>
+      <button type="submit"  class="activityForm__submit">
+      Create Activity
+      </button>
+
+      <!-- validation -->
+      <div *ngIf="name.invalid && showMessages" class="activityForm__warning">
+        A name is required.
+      </div>
+    </flex-row-start-center>
+  </form>
+</flex-col>
+

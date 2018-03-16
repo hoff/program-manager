@@ -24,12 +24,14 @@ import {
   programReducer,
   activityReducer,
   uiReducer
-} from './reducers'
+} from './reducers';
+import { ActivityFormComponent } from './activity-form/activity-form.component'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ActivityFormComponent
   ],
   imports: [
     BrowserModule,

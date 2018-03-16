@@ -16,9 +16,9 @@
       This program doesn't have any activities yet. You can create one below.
     </div>
 
+    <!-- list of activities -->
     <div *ngFor="let activity of program.activities">
       
-
       <flex-row class="activity__container">
           <flex-col style="flex-grow: 1;">
               <div class="activity__name">{{ activity.name }}</div>
@@ -27,43 +27,16 @@
                   <span *ngIf="activity.expected_end_date"> - {{ activity.expected_end_date | date:'mediumDate' }}</span>
                 </div>
           </flex-col>
-          
+          <!-- delete activity -->
           <button (click)="data.deleteActivity(activity.id)" class="activityForm__delete">delete activity</button>
       </flex-row>
-
-      
-
-    </div>
-    
-    <flex-col>
-
-      <!-- new activity -->
-      <input type="text" #newActivityName placeholder="New Activity Name" class="activityForm__input"/>
-
-      <div>
-      <!-- start date -->
-      <input [matDatepicker]="startDate" #startDateInput placeholder="Start Date" class="activityForm__input">
-      <mat-datepicker-toggle [for]="startDate"></mat-datepicker-toggle>
-      <mat-datepicker #startDate></mat-datepicker>
-      
-      <!-- end date -->
-      <input [matDatepicker]="endDate" #endDateInput placeholder="End Date" class="activityForm__input">
-      <mat-datepicker-toggle [for]="endDate"></mat-datepicker-toggle>
-      <mat-datepicker #endDate></mat-datepicker>
-
     </div>
 
-    </flex-col>
-      
-      <!-- create -->
-      <button (click)="data.createActivity(newActivityName.value, program.url, startDateInput.value, endDateInput.value)" class="activityForm__submit">
-        Create Activity
-      </button>
+    <!-- new activity form -->
+    <app-activity-form [programURL]="program.url"></app-activity-form>
 
   </div>
-
 </div>
-
 </div>
 
 

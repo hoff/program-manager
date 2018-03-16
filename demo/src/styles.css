@@ -23,6 +23,11 @@ flex-row {
 	display: flex;
 }
 
+flex-row-start-center {
+	display: flex;
+	align-items: center;
+}
+
 flex-col { 
 	display: flex;
 	flex-direction: column;
@@ -73,6 +78,11 @@ flex-col {
 .activity__placeholder {
 	color: gray;
 	padding: 20px 0;
+}
+
+.activityForm__warning {
+	color: darkred;
+	padding: 0px 30px;
 }
 
 .programContainer {

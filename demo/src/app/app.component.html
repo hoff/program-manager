@@ -2,8 +2,8 @@
 
   <div style="border-bottom: 1px solid #333; margin-bottom: 60px;">
 
+    <p>Authentication token: <input type="text" (input)="data.token = $event.target.value" [value]="data.token"/></p>
     <h1 (click)="data.setLoading()">Program Manager</h1>
-    <p>a demo application</p>
   </div>
 
 <div>
